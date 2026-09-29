@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}StayNest{% endblock %}</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/app.css') }}">
+</head>
+<body>
+  <aside class="sidebar">
+    <a class="brand" href="{{ url_for('main.dashboard') }}"><span class="brand-mark">S</span><span>StayNest</span></a>
+    <p class="eyebrow">MANAGEMENT</p>
+    <nav>
+      <a href="{{ url_for('main.dashboard') }}">Overview</a>
+      <a href="{{ url_for('main.rooms') }}">Rooms</a>
+      <a href="{{ url_for('main.students') }}">Students</a>
+      <a href="{{ url_for('main.owners') }}">Owners</a>
+      <a href="{{ url_for('main.leases') }}">Leases</a>
+      <a href="{{ url_for('main.payments') }}">Payments</a>
+    </nav>
+    <div class="sidebar-note"><strong>Keep it simple.</strong><br>One place for every stay, room, and payment.</div>
+  </aside>
+  <main class="main-content">
+    <header class="topbar"><div><p class="eyebrow">{{ self.title() }}</p><h1>{% block heading %}Good morning{% endblock %}</h1></div><div class="avatar">A</div></header>
+    {% with messages = get_flashed_messages(with_categories=true) %}{% if messages %}{% for category, message in messages %}<div class="flash {{ category }}">{{ message }}</div>{% endfor %}{% endif %}{% endwith %}
+    {% block content %}{% endblock %}
+  </main>
+</body>
+</html>
